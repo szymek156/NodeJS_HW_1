@@ -19,12 +19,11 @@ server.unifiedServer = function(req, res) {
     req.on("end", function() {
         buffer += decoder.end();
 
-        let parsedUrl = url.parse(req.url, true);
-        let path      = parsedUrl.pathname.replace(/^\/+|\/+$/g, "");
+        let parsedUrl = url.parse(req.url, true);                      // Split endpoint from query
+        let path      = parsedUrl.pathname.replace(/^\/+|\/+$/g, "");  // Trim redundant slashes
 
         var data = {
-            "trimmedPath": path,
-            "queryStringObject": parsedUrl.query,
+            "endpoint": path,
             "method": req.method.toLowerCase(),
             "headers": req.headers,
             "payload": buffer
@@ -63,7 +62,7 @@ handlers.hello = async function(data) {
         }
     }
 
-    // return Promise.resolve(response)
+    // return Promise.resolve(response) -> JS does this automagically
     return response;
 };
 
