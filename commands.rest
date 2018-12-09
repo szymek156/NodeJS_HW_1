@@ -1,3 +1,5 @@
+# You can use this file in VS code to send requests and check responses,
+# if you have REST Client addon installed
 POST http://localhost:3000/hello
 Content-Type: application/json
 
